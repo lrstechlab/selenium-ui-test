@@ -6,7 +6,7 @@ Mysql server- https://dev.mysql.com/downloads/mysql/
 MySql workbench- https://dev.mysql.com/downloads/workbench/
 
 #creating database
-  create database tipicoCar;
+       create database tipicoCar;
 
 #create Table. first point to database you want to use and then create table
 
