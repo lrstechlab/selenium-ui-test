@@ -149,7 +149,7 @@
         <version>3.0.0-M6</version>
         <configuration>
           <includes>
-            <include>**/TestNGTestRunner.java</include>
+            <include>**/MainRunner.java</include>
           </includes>
         </configuration>
       </plugin>
