@@ -5,129 +5,44 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import tipico.AbstractComponents.AbstractComponent;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-public class LandingPage extends AbstractComponent{
+public class LandingPage extends AbstractComponent {
 
-	WebDriver driver;
-	
-	public LandingPage(WebDriver driver)
-	{
-		super(driver);
-		//initialization
-		this.driver=driver;
-		PageFactory.initElements(driver, this);
-		
-	}
-		
-	//WebElement userEmails = driver.findElement(By.id("userEmail"));
-	//PageFactory
+    WebDriver driver;
 
-	@FindBy(id="_evidon-accept-button")
-	WebElement acceptCookies;
+    public LandingPage(WebDriver driver) {
+        super(driver);
+        this.driver = driver;
+        PageFactory.initElements(driver, this);
 
-	@FindBy(xpath= "//*[@id='js-nav']/ul/li[1]/a")
-	WebElement jobsButton;
-
-	@FindBy(xpath="//*[@id=\"results\"]/div/section/div[2]/div")
-	List<WebElement> activeJobs;
-
-	@FindBy(xpath = "//*[@id='results']/div/section/nav/ul/li")
-	List<WebElement> carrierlistpagination;
-
-	@FindBy(xpath ="//*[@id=\"results\"]/div/section/div[2]/div")
-	List<WebElement> jobListElement;
-
-	@FindBy(xpath ="//*[@id='results']/div/section/nav/ul/li[3]/a")
-	WebElement nextPageButton;
+    }
 
 
-	public WebElement nextPageButton(){
-		return nextPageButton;
-	}
+    @FindBy(id = "_evidon-accept-button")
+    WebElement acceptCookies;
 
-	public List<WebElement> jobListElement(){
-		return jobListElement;
-	}
+    @FindBy(xpath = "//*[@id='js-nav']/ul/li[1]/a")
+    WebElement jobsButton;
 
-	public List<WebElement> carrierlistpagination(){
-		return carrierlistpagination;
-	}
-
-	public List<WebElement> activeJobsList(){
-		return activeJobs;
-	}
+    public WebElement getJobsButton() {
+        return jobsButton;
+    }
 
 
-	public void acceptCookies(){
-		acceptCookies.click();
-	}
+    public JobsPage gotoJobsPage() {
+        getJobsButton().click();
 
-//one resouce pfolder path is fixed this will also get parameterised. i will refactor this later.
-	public void goTo()
-	{
-		driver.get("https://www.tipico-careers.com/en/jobs/");
-	}
+        JobsPage jobsPage = new JobsPage(driver);
+        return jobsPage;
+    }
 
+    public void acceptCookies() {
+        acceptCookies.click();
+    }
 
-
-
-	public List<String> fetchjobList2() throws InterruptedException {
-		List<String> jobList = new ArrayList<String>();
-		int pagesLen= carrierlistpagination().size();
-		System.out.println("the lenght of the pages is----------"+pagesLen);
-
-		for (int page = 1; page < pagesLen; page++) {
-			// Wait for the page to load
-			System.out.println("the pagination started");
-			Thread.sleep(1000);
-			// Find all the job listings on the current page
-			List<WebElement> jobElements = jobListElement();
-			// List<WebElement> jobElements = driver.findElements(By.xpath("//*[@id=\"results\"]/div/section/div[2]/div"));
-			// Add the job titles to the jobList
-			for (WebElement jobElement : jobElements) {
-				String jobTitle = jobElement.getText();
-				jobList.add(jobTitle);
-			}
-			//WebElement nextPageButton = driver.findElement(By.xpath("//*[@id='results']/div/section/nav/ul/li[3]/a"));
-			WebElement nextPageButton = nextPageButton();
-			String url = nextPageButton.getAttribute("href");
-			driver.get(url);
-		}
-
-		return jobList;
-	}
-
-	public void writeToDB(List<String> jobList) throws SQLException, IOException {
-		getDbUpdate(jobList);
-	}
-
-	private static List<String> neededVariable;
-
-	public List<String> getVariable(){
-		return neededVariable;
-	}
-
-	public void setVariable(List<String> var){
-		this.neededVariable = var;
-	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public void goTo(String url) {
+        driver.get(url);
+    }
 
 
 }
