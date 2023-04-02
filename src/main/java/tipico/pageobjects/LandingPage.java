@@ -35,8 +35,8 @@ public class LandingPage extends AbstractComponent{
 	@FindBy(xpath="//*[@id=\"results\"]/div/section/div[2]/div")
 	List<WebElement> activeJobs;
 
-	@FindBy(xpath = "//*[@id=\"results\"]/div/section/nav/ul/li[4]/a")
-	WebElement carrierlistpagination;
+	@FindBy(xpath = "//*[@id='results']/div/section/nav/ul/li")
+	List<WebElement> carrierlistpagination;
 
 	@FindBy(xpath ="//*[@id=\"results\"]/div/section/div[2]/div")
 	List<WebElement> jobListElement;
@@ -53,7 +53,7 @@ public class LandingPage extends AbstractComponent{
 		return jobListElement;
 	}
 
-	public WebElement carrierlistpagination(){
+	public List<WebElement> carrierlistpagination(){
 		return carrierlistpagination;
 	}
 
@@ -77,7 +77,10 @@ public class LandingPage extends AbstractComponent{
 
 	public List<String> fetchjobList2() throws InterruptedException {
 		List<String> jobList = new ArrayList<String>();
-		for (int page = 1; page <= 3; page++) {
+		int pagesLen= carrierlistpagination().size();
+		System.out.println("the lenght of the pages is----------"+pagesLen);
+
+		for (int page = 1; page < pagesLen; page++) {
 			// Wait for the page to load
 			System.out.println("the pagination started");
 			Thread.sleep(1000);
