@@ -1,21 +1,21 @@
-# tipico-ui-test
-tipiko-ui-test
+# Selenium-ui-test
+Selenium-ui-test
 This test required MySQL db to be setup. Please follow link to 
 Download mySQL officially from below link- http://dev.mysql.com/downloads/
 Mysql server- https://dev.mysql.com/downloads/mysql/
 MySql workbench- https://dev.mysql.com/downloads/workbench/
 
 #creating database
-       create database tipicoCar;
+       create database dbCar;
 
 #create Table. first point to database you want to use and then create table
 
-      use tipicoCar;
+      use dbCar;
       create table activeJobs(JobTitle varchar(300), Department varchar(300), Location varchar(30));
       alter table activeJobs add primary key (JobTitle,Department,Location)
 
 #check the details of your Table
-      use tipicoCar;
+      use dbCar;
       describe activeJobs;
       
 # Update the globalvariable.properties file in resources with the connection details like- host, port, username and password.
